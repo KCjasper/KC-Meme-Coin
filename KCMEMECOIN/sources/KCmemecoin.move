@@ -8,7 +8,7 @@ module KCmemecoin::kc_coin {
 
     public struct KC_COIN has drop {}
 
-
+    //Initialize Token Contract
     fun init(witness: KC_COIN, ctx: &mut TxContext) {
         let icon_url = url::new_unsafe_from_bytes(
             b"https://cdn.midjourney.com/b2700cb9-b8a6-4a87-9864-40273acd6f8a/0_0.png"
@@ -29,7 +29,7 @@ module KCmemecoin::kc_coin {
         transfer::public_transfer(treasury_cap, tx_context::sender(ctx));
     }
 
-
+    //mint function
     public entry fun mint(
         treasury: &mut TreasuryCap<KC_COIN>,
         amount: u64,
@@ -39,7 +39,7 @@ module KCmemecoin::kc_coin {
         let coin = coin::mint(treasury, amount, ctx);
         transfer::public_transfer(coin, recipient);
     }
-
+    //Show Balance function
     public fun balance(coin: &Coin<KC_COIN>): u64 {
         coin::value(coin)
     }
